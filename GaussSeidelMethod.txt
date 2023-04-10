@@ -1,0 +1,24 @@
+A =input('Matrix A: ') ;
+%input matrix, end (0's), guess, it, and tol
+solution = input('Solution vector: ');
+G = input('Guess: ');
+n = input('Iterations: ');
+tol = input ('Tol: ');
+len = length(solution);
+alpha = zeros(len,1);
+beta = zeros(len,1);
+
+%calculates gauss-seidel, beta set backup
+for j=1:n
+    for i=1:len
+        alpha(i) = (solution(i)/A(i,i)) - (A(i, [1:i-1,i+1:len])*G([1:i-1,i+1:len]))/A(i,i);
+        G(i) = alpha(i);
+    end
+    fprintf('Iteration number: %d\n', j);
+    alpha
+    if abs(beta-alpha)<tol
+        break
+    end
+    beta=alpha;
+
+    end
